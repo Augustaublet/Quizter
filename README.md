@@ -1,6 +1,6 @@
 # Quizter
 
-Quster is a fun quiz app for mobile.
+Quizter is a fun quiz app for mobile.
 
 
 ## Setup
