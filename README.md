@@ -1,23 +1,22 @@
-## Projekt arbete kurs TIG333 Programmering av mobila appar i flutter.
+# Quizter
 
-# Quizter Pettersson
+Quster is a fun quiz app for mobile.
 
-En Quiz app som använder sig av ett öppet api med flersvarsfrågor. 
-Stort tack till [The Trivia API](https://the-trivia-api.com/) och Will Fry som skapat det. 
-Vi använder en databas från [Deta](https://deta.sh) för att lagra data till highscore. 
-Så man kan skryta med sitt resultat
 
-## Innan användning!!
-För att highscore skall fungera behövs en nyckel till databasen.
+## Setup
+Before start set up secrets.
 - lib/auth/<example_top_secret.dart>. 
-- Gör en kopia på samma plats. 
-- Döp om till lib/auth<top_secret.dart>. 
-- Använd demonyckel som databasKey för att testa spelet med Highscore.
+- Make a copy in the same place. 
+- lib/auth/<top_secret.dart>. 
+- There is a demo key for testing in the example file.
 
-## Vi som gjort detta projekt är:
+
+## This is a student project made by
  - August Aublet
  - Gustaf Hasselgren
  - Mårten Jonsson
  - Ludvig Boström
  - Andreas Fredrison
  - Josef Gunnarsson
+
+## Thanks to [The Trivia API](https://the-trivia-api.com/) and Will Fry how created it. 
