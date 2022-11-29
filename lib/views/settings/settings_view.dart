@@ -72,6 +72,7 @@ class SettingsView extends StatelessWidget {
               height: 20,
             ),
             const HighscoreRulesRow(),
+            // _traslate(),
             const Spacer(),
             _startButton(gameSession, context),
             const Spacer(),
@@ -165,4 +166,9 @@ class SettingsView extends StatelessWidget {
     return Text(gameSession.getNumberOfQuestion().round().toString(),
         style: TextStyle(color: Themes.colors.white));
   }
+
+  // Widget _traslate(){
+  //   return Checkbox(value: false, onChanged: onChanged)
+  // }
+
 }

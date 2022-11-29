@@ -46,6 +46,7 @@ dependencies:
   fading_edge_scrollview: ^3.0.0
   timer_count_down: ^2.2.1
   audioplayers: ^1.1.1
+  translator: ^0.1.7
   # flutter_math: ^0.2.1
 
   

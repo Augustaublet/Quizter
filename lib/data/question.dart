@@ -1,3 +1,5 @@
+import 'package:translator/translator.dart';
+
 //Objektet Question innehåller information som rör en fråga.
 
 class Question {
@@ -45,6 +47,32 @@ class Question {
         difficulty: json["difficulty"],
         index: index);
   }
+
+  static Future<Question> fromJsonTranslated(
+      Map<String, dynamic> json, index) async {
+    final translator = GoogleTranslator();
+    const String language = "sv";
+
+    List<String> incorrectInFormat = [];
+    for (String stringAnswer in json["incorrectAnswers"]) {
+      var translation = await translator.translate(stringAnswer, to: language);
+      incorrectInFormat.add(translation.text);
+    }
+
+    var correctT =
+        await translator.translate(json["correctAnswer"], to: language);
+    var questionT = await translator.translate(json["question"], to: language);
+    return Question(
+        id: json["id"],
+        category: json["category"],
+        correctAnswer: correctT.text,
+        // incorrectAnswers: json["incorrectAnswers"],
+        incorrectAnswers: incorrectInFormat,
+        question: questionT.text,
+        difficulty: json["difficulty"],
+        index: index);
+  }
+
   // getters
   get id => _id;
   get category => _category;

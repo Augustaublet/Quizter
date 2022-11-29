@@ -33,7 +33,7 @@ class HttpConection {
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
       for (var question in data) {
-        questionList.add(Question.fromJson(question, index));
+        questionList.add(await Question.fromJsonTranslated(question, index));
         index += 1;
       }
     }
