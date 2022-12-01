@@ -1,4 +1,5 @@
 import 'package:translator/translator.dart';
+import "libre_translator.dart";
 
 //Objektet Question innehåller information som rör en fråga.
 
@@ -50,25 +51,23 @@ class Question {
 
   static Future<Question> fromJsonTranslated(
       Map<String, dynamic> json, index) async {
-    final translator = GoogleTranslator();
-    const String language = "sv";
+    final translator = LibreTranslateAPI();
 
     List<String> incorrectInFormat = [];
     for (String stringAnswer in json["incorrectAnswers"]) {
-      var translation = await translator.translate(stringAnswer, to: language);
-      incorrectInFormat.add(translation.text);
+      String translation =
+          await translator.translate(q: stringAnswer, target: "sv");
+      incorrectInFormat.add(translation);
     }
 
-    var correctT =
-        await translator.translate(json["correctAnswer"], to: language);
-    var questionT = await translator.translate(json["question"], to: language);
     return Question(
         id: json["id"],
         category: json["category"],
-        correctAnswer: correctT.text,
+        correctAnswer:
+            await translator.translate(q: json["correctAnswer"], target: "sv"),
         // incorrectAnswers: json["incorrectAnswers"],
         incorrectAnswers: incorrectInFormat,
-        question: questionT.text,
+        question: await translator.translate(q: json["question"], target: "sv"),
         difficulty: json["difficulty"],
         index: index);
   }
