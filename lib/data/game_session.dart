@@ -10,6 +10,7 @@ import 'package:template/data/question.dart';
 import 'package:template/data/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:template/theme/theme.dart';
+import 'package:template/data/language_selector.dart';
 
 class GameSession extends ChangeNotifier {
   Settings settings = Settings();
@@ -37,6 +38,12 @@ class GameSession extends ChangeNotifier {
 
   Future startGame() async {
     gameQuestions = await httpConection.getQuestions(settings: settings);
+
+    // testing translation on real data
+    TranslatorTesting t = TranslatorTesting();
+    for (Question question in gameQuestions) {
+      t.translatQuestion(question);
+    }
 
     if (gameQuestions.isEmpty) {
       httpFetchComplete = false;

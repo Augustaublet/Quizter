@@ -10,8 +10,8 @@ class LibreTranslateAPI {
 
   //LibreTranslateAPI({this.apiKey = ""});
 
-  Future<String> translate(
-      {required String q, String source = "en", required String target}) async {
+  Future translate(
+      {required var q, String source = "en", required String target}) async {
     String path = "translate";
     http.Response response =
         await http.post(Uri.parse('$defaultUrl$path'), body: {
@@ -20,7 +20,11 @@ class LibreTranslateAPI {
       "target": target,
       "format": "text",
     });
-    return jsonDecode(response.body)["translatedText"];
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body)["translatedText"];
+    } else {
+      return "fel";
+    }
   }
 
   Future<String> detect({required String q}) async {

@@ -48,35 +48,36 @@ class Question {
         difficulty: json["difficulty"],
         index: index);
   }
+  // test som skcickar alla frågor direkt och alla strängar en och en. (inte bra!)
+  // static Future<Question> fromJsonTranslated(
+  //     Map<String, dynamic> json, index) async {
+  //   final translator = LibreTranslateAPI();
 
-  static Future<Question> fromJsonTranslated(
-      Map<String, dynamic> json, index) async {
-    final translator = LibreTranslateAPI();
+  //   List<String> incorrectInFormat = [];
+  //   for (String stringAnswer in json["incorrectAnswers"]) {
+  //     String translation =
+  //         await translator.translate(q: stringAnswer, target: "sv");
+  //     incorrectInFormat.add(translation);
+  //   }
 
-    List<String> incorrectInFormat = [];
-    for (String stringAnswer in json["incorrectAnswers"]) {
-      String translation =
-          await translator.translate(q: stringAnswer, target: "sv");
-      incorrectInFormat.add(translation);
-    }
-
-    return Question(
-        id: json["id"],
-        category: json["category"],
-        correctAnswer:
-            await translator.translate(q: json["correctAnswer"], target: "sv"),
-        // incorrectAnswers: json["incorrectAnswers"],
-        incorrectAnswers: incorrectInFormat,
-        question: await translator.translate(q: json["question"], target: "sv"),
-        difficulty: json["difficulty"],
-        index: index);
-  }
+  //   return Question(
+  //       id: json["id"],
+  //       category: json["category"],
+  //       correctAnswer:
+  //           await translator.translate(q: json["correctAnswer"], target: "sv"),
+  //       // incorrectAnswers: json["incorrectAnswers"],
+  //       incorrectAnswers: incorrectInFormat,
+  //       question: await translator.translate(q: json["question"], target: "sv"),
+  //       difficulty: json["difficulty"],
+  //       index: index);
+  // }
 
   // getters
   get id => _id;
   get category => _category;
   get question => _question;
   get correctAnswer => _correctAnswer;
+  get incorrectAnswer => _incorrectAnswers;
   get allAnswersInRandomOrder => _allAnswersInRandomOrder;
   get difficulty => _difficulty;
   get index => _index;
@@ -87,10 +88,23 @@ class Question {
     List<String> incorrectAnswers,
     String correctAnswer,
   ) {
-    List<String> allAnswersInRandomOrder = incorrectAnswers;
+    List<String> allAnswersInRandomOrder = [];
+    for (String i in incorrectAnswers) {
+      allAnswersInRandomOrder.add(i);
+    }
+
+    // List<String> allAnswersInRandomOrder = incorrectAnswers;
     allAnswersInRandomOrder.add(correctAnswer);
     allAnswersInRandomOrder.shuffle();
 
     return allAnswersInRandomOrder;
+  }
+
+  void updateWithTranslation(String translatedQuestion,
+      String translatedCorrectAnswer, List<String> translatedIncorrectAnswers) {
+    _question = translatedQuestion;
+    _correctAnswer = translatedCorrectAnswer;
+    _incorrectAnswers = translatedIncorrectAnswers;
+    scrambleAllAnswers(translatedIncorrectAnswers, translatedCorrectAnswer);
   }
 }
