@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class TranslateSettings extends ChangeNotifier {
-  bool _translate = false;
+  bool _translate = true;
   String _selectedLanguage = "swedish";
   final List<String> _languageList = [
     "swedish",
@@ -12,11 +12,11 @@ class TranslateSettings extends ChangeNotifier {
     "finnish"
   ];
 
-  get tranlate => _translate;
+  get tranlateBool => _translate;
   get selectedLanguage => _selectedLanguage;
   get languages => _languageList;
 
-  void changeIsTranslateing() {
+  void changeIsTranslating() {
     _translate = !_translate;
     notifyListeners();
   }

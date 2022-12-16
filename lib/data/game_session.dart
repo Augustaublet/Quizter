@@ -36,13 +36,15 @@ class GameSession extends ChangeNotifier {
     return settings.timePerQuestion.toDouble();
   }
 
-  Future startGame() async {
+  Future startGame(bool doTranslate, String languageSelected) async {
     gameQuestions = await httpConection.getQuestions(settings: settings);
 
-    // testing translation on real data
-    Translator t = Translator();
-    for (Question question in gameQuestions) {
-      t.translatQuestion(question);
+    if (doTranslate) {
+      // testing translation on real data
+      Translator t = Translator();
+      for (Question question in gameQuestions) {
+        t.translatQuestion(question, targetLanguage: languageSelected);
+      }
     }
 
     if (gameQuestions.isEmpty) {

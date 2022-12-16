@@ -10,6 +10,7 @@ import 'package:template/components/difficulty_row.dart';
 import 'package:template/views/settings/widgets/highscore_rules_row.dart';
 import 'package:template/components/backbutton.dart';
 import 'package:template/components/slider.dart';
+import 'package:template/views/settings/widgets/language_selection_row.dart';
 
 import 'widgets/category_info_dialog.dart';
 
@@ -37,7 +38,7 @@ class SettingsView extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 40,
+              height: 5,
             ),
             _menuDescriptioTextAndInfoButton(context, "Categories"),
             const SizedBox(
@@ -45,7 +46,7 @@ class SettingsView extends StatelessWidget {
             ),
             const CategoryRow(),
             const SizedBox(
-              height: 20,
+              height: 5,
             ),
             _menuDescriptionText(text: 'Number of questions'),
             const SizedBox(
@@ -72,7 +73,10 @@ class SettingsView extends StatelessWidget {
               height: 20,
             ),
             const HighscoreRulesRow(),
-            // _traslate(),
+            const SizedBox(
+              height: 20,
+            ),
+            const LanguageSelectionRow(),
             const Spacer(),
             _startButton(gameSession, context),
             const Spacer(),

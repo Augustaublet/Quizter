@@ -4,7 +4,7 @@ import 'package:template/data/question.dart';
 
 class Translator {
   Future<void> translatQuestion(Question question,
-      {String targetLanguage = "sv"}) async {
+      {String targetLanguage = "swedish"}) async {
     TranslateOpenAI translateOpenAI = TranslateOpenAI();
 
     // Creating a Json format string containing the strings that is going to be translated.
@@ -15,21 +15,21 @@ class Translator {
     });
 
     var translatedQuestionOpenAI = await translateOpenAI.getTranslate(
-        questionJson: questionJson, language: 'swedish');
-    try {
-      // Map<dynamic, dynamic> test = jsonDecode(translatedQuestionopenAI);
-      List incorrectTranslated = jsonDecode(translatedQuestionOpenAI["3"]);
-      List<String> finalIncorrectTranslated = [];
-      incorrectTranslated.forEach((element) {
-        finalIncorrectTranslated.add(element.toString());
-      });
+        questionJson: questionJson, language: targetLanguage);
 
-      // String translatedOpenAI =
-      //     "${translatedQuestionOpenAI["1"]},${translatedQuestionOpenAI["2"]},${incorrectTranslated[0]},${incorrectTranslated[1]},${incorrectTranslated[2]}";
+    print(translatedQuestionOpenAI);
+    // Map<dynamic, dynamic> test = jsonDecode(translatedQuestionopenAI);
+    List incorrectTranslated = jsonDecode(translatedQuestionOpenAI[3]);
+    List<String> finalIncorrectTranslated = [];
+    incorrectTranslated.forEach((element) {
+      finalIncorrectTranslated.add(element.toString());
+    });
 
-      question.updateWithTranslation(translatedQuestionOpenAI["1"],
-          translatedQuestionOpenAI["2"].toString(), finalIncorrectTranslated);
-      // ignore: empty_catches
-    } catch (error) {}
+    // String translatedOpenAI =
+    //     "${translatedQuestionOpenAI["1"]},${translatedQuestionOpenAI["2"]},${incorrectTranslated[0]},${incorrectTranslated[1]},${incorrectTranslated[2]}";
+
+    question.updateWithTranslation(translatedQuestionOpenAI["1"],
+        translatedQuestionOpenAI["2"].toString(), finalIncorrectTranslated);
+    // ignore: empty_catches
   }
 }

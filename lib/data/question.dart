@@ -1,6 +1,3 @@
-import 'package:translator/translator.dart';
-import "libre_translator.dart";
-
 //Objektet Question innehåller information som rör en fråga.
 
 class Question {

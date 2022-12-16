@@ -34,10 +34,9 @@ class TranslateOpenAI {
     );
     if (response.statusCode == 200) {
       var data = jsonDecode(utf8.decode(response.bodyBytes));
-
       var temp = jsonDecode(data['choices'][0]['text']);
-      List incorrectList = jsonDecode(temp["3"]);
-
+      //List incorrectList = jsonDecode(temp["3"]);
+      //print(temp);
       return jsonDecode(data['choices'][0]['text']);
     } else {
       return response.statusCode.toString(); // tevksam kod :o

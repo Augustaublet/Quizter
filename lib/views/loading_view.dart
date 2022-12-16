@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:template/data/game_session.dart';
+import 'package:template/data/translation/translation_settings.dart';
 import 'package:template/theme/theme.dart';
 import 'package:template/views/question_view.dart';
 import 'package:template/views/start_view.dart';
@@ -17,7 +18,10 @@ class LoadingView extends StatelessWidget {
   Widget build(BuildContext context) {
     bool getReady = true;
     void fetching() async {
-      await Provider.of<GameSession>(context, listen: false).startGame();
+      await Provider.of<GameSession>(context, listen: false).startGame(
+          Provider.of<TranslateSettings>(context, listen: false).tranlateBool,
+          Provider.of<TranslateSettings>(context, listen: false)
+              .selectedLanguage);
       getReady = false;
       _controller.start();
     }
