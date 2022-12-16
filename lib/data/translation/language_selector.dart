@@ -17,9 +17,8 @@ class Translator {
     var translatedQuestionOpenAI = await translateOpenAI.getTranslate(
         questionJson: questionJson, language: targetLanguage);
 
-    print(translatedQuestionOpenAI);
     // Map<dynamic, dynamic> test = jsonDecode(translatedQuestionopenAI);
-    List incorrectTranslated = jsonDecode(translatedQuestionOpenAI[3]);
+    List incorrectTranslated = jsonDecode(translatedQuestionOpenAI["3"]);
     List<String> finalIncorrectTranslated = [];
     incorrectTranslated.forEach((element) {
       finalIncorrectTranslated.add(element.toString());
