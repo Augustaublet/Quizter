@@ -8,3 +8,4 @@
 // Also during testin change dbName in hiscores.dart to "highscores-1"
 
 var databaseKey = "Your secret key here";
+var openAIKey = "Your secret key here";

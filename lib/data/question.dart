@@ -105,6 +105,7 @@ class Question {
     _question = translatedQuestion;
     _correctAnswer = translatedCorrectAnswer;
     _incorrectAnswers = translatedIncorrectAnswers;
-    scrambleAllAnswers(translatedIncorrectAnswers, translatedCorrectAnswer);
+    _allAnswersInRandomOrder =
+        scrambleAllAnswers(translatedIncorrectAnswers, translatedCorrectAnswer);
   }
 }
