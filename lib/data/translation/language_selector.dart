@@ -6,6 +6,7 @@ class Translator {
   Future<void> translatQuestion(Question question,
       {String targetLanguage = "swedish"}) async {
     TranslateOpenAI translateOpenAI = TranslateOpenAI();
+    List<String> finalIncorrectTranslated = [];
 
     // Creating a Json format string containing the strings that is going to be translated.
     var questionJson = jsonEncode({
@@ -17,18 +18,28 @@ class Translator {
     var translatedQuestionOpenAI = await translateOpenAI.getTranslate(
         questionJson: questionJson, language: targetLanguage);
 
-    // Map<dynamic, dynamic> test = jsonDecode(translatedQuestionopenAI);
-    List incorrectTranslated = jsonDecode(translatedQuestionOpenAI["3"]);
-    List<String> finalIncorrectTranslated = [];
-    incorrectTranslated.forEach((element) {
-      finalIncorrectTranslated.add(element.toString());
-    });
+    // rying to decode if there is an error this will try to get
+    // another one. If that one fails it will just show in English.
+    try {
+      List incorrectTranslated = jsonDecode(translatedQuestionOpenAI["3"]);
+      incorrectTranslated.forEach((element) {
+        finalIncorrectTranslated.add(element.toString());
+      });
+    } catch (e) {
+      print("##############");
+      print(e);
+      print("##############");
 
-    // String translatedOpenAI =
-    //     "${translatedQuestionOpenAI["1"]},${translatedQuestionOpenAI["2"]},${incorrectTranslated[0]},${incorrectTranslated[1]},${incorrectTranslated[2]}";
+      var translatedQuestionOpenAI = await translateOpenAI.getTranslate(
+          questionJson: questionJson, language: targetLanguage);
+      List incorrectTranslated = jsonDecode(translatedQuestionOpenAI["3"]);
+      incorrectTranslated.forEach((element) {
+        finalIncorrectTranslated.add(element.toString());
+      });
+    }
 
+    // updates the qustions with translated text.
     question.updateWithTranslation(translatedQuestionOpenAI["1"],
         translatedQuestionOpenAI["2"].toString(), finalIncorrectTranslated);
-    // ignore: empty_catches
   }
 }
