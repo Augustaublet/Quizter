@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:template/auth/top_secret.dart';
 
 class TranslateOpenAI {
-  final String _apiKey = openAIKey;
+  final String _apiKey = myKey;
   final String _url = 'https://api.openai.com/v1/completions';
 
   String prompt =
